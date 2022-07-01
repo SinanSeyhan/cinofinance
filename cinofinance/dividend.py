@@ -18,8 +18,8 @@ def get_dividends(tickers):
     df = df.groupby(df.columns, axis=1).sum()
     df.columns = [dt.date(1900,i,1).strftime('%b') for i in df.columns]
     df['Lot'] = df.index.map(tickers)
-    name = [yf.Ticker(i).info['longName'] for i in tickers.keys()]
-    df['Name'] = name
+    # name = [yf.Ticker(i).info['longName'] for i in tickers.keys()]
+    # df['Name'] = name
     price = [yf.download(i, period='1d')['Adj Close'].values[0] for i in tickers.keys()]
     df['Price'] = price
     #df = df[['Name', 'Price', 'Lot', 'Jan', 'Feb', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']]
