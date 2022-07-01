@@ -16,7 +16,6 @@ class Dividend():
 
     def get_dividends(self):
         df = pd.read_csv(TICKER_PATH_TOTAL)
-        df.drop('Unnamed: 0', axis=1, inplace=True)
         divs = []
         for key in df['ACT Symbol']:
             temp = yf.Ticker(key)
