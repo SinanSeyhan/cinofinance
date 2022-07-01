@@ -17,10 +17,8 @@ pytest
 yapf
 
 # API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
+yfinance
+forex_python
 
 # utilities
 six>=1.14
