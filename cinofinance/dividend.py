@@ -10,7 +10,7 @@ class Dividend():
     def __init__(self):
         my_path = os.path.abspath(os.path.dirname(__file__))
         global TICKER_PATH_TOTAL
-        self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/total_tickers.csv')
+        self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
 
     def usd2eur(self, amount):
         brutto2netto = 0.855
@@ -29,24 +29,39 @@ class Dividend():
             divs.append(temp.dividends)
         return divs
 
-    def get_portfolio_dividends(self, tickers):
-        divs = []
-        for key, value in tickers.items():
-            temp = yf.Ticker(key)
-            temp.history(period='1y')
-            divs.append(temp.dividends * value)
-        df = pd.DataFrame(divs, index=tickers)
-        df.columns = df.columns.month
-        df = df.groupby(df.columns, axis=1).sum()
-        df.columns = [dt.date(1900,i,1).strftime('%b') for i in df.columns]
-        df['Lot'] = df.index.map(tickers)
+    def get_portfolio_dividends(self, portfolio):
+        '''
+        Function that gives you the dividends, names of passed dictionary.
+
+        portfolio: dict, with tickers as keys and lot size as values.
+        '''
+
+        # Load the portfolio
+        df = pd.DataFrame([portfolio]).T
+        df.rename({0:'Lot'}, axis=1, inplace=True)
+
         # get the names of stocks
         df_tickers = pd.read_csv(self.TICKER_PATH_TOTAL)
-        #df['Name'] = df_tickers[df_tickers['ACT Symbol'].isin(list(tickers.keys()))]['Company Name'].values
-        df['Price'] = [yf.download(i, period='1d')['Adj Close'].values[0] for i in tickers.keys()]
-        #df = df[['Name', 'Price', 'Lot', 'Jan', 'Feb', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']]
-        df = self.usd2eur(df.select_dtypes(include='float'))
-        return df
+        names = df_tickers[df_tickers['Symbol'].isin(list(portfolio.keys()))].iloc[:, 0:2].set_index('Symbol')
+        df = df.join(names)
+
+        # Get the Dividends
+        divs = []
+        for key, value in portfolio.items():
+            temp = yf.Ticker(key)
+            temp.history(period='1y')
+            divs.append(self.usd2eur(temp.dividends * value))
+        df2 = pd.DataFrame(divs, index=portfolio)
+        df2.columns = df2.columns.month
+        df2 = df2.groupby(df2.columns, axis=1).sum()
+        df2.columns = [dt.date(1900,i,1).strftime('%b') for i in df2.columns]
+        # Merge the dataframes
+        result = df.merge(df2, left_index=True, right_index=True)
+
+        #get price information
+        price = [yf.download(i, period='1d')['Adj Close'].values[0] for i in portfolio.keys()]
+        result['Price'] = price
+        return result
 
 
 if __name__=='__main__':
