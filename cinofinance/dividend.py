@@ -176,7 +176,7 @@ class Dividend():
         Gives a dataframe from the pool
         '''
         df = self.get_dividends(self.pool)
-        df['Lot'] = (100 / df['Price'])
+        df['Lot'] = (capital / df['Price'])
         df['Lot'] = df['Lot'].apply(np.floor)
 
         month_columns = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
