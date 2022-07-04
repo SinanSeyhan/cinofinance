@@ -13,6 +13,11 @@ class Dividend():
         self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
 
     def usd2eur(self, amount):
+        '''
+        Function that converts US Dollars to EUR
+
+        amount: float, US Dollars to convert
+        '''
         brutto2netto = 0.855
         return (amount * brutto2netto) * CurrencyRates().get_rates('USD')['EUR']
 
