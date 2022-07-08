@@ -10,6 +10,7 @@ from forex_python.converter import CurrencyRates
 
 class Dividend():
     def __init__(self):
+
         my_path = os.path.abspath(os.path.dirname(__file__))
         global TICKER_PATH_TOTAL
         self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
