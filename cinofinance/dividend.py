@@ -36,7 +36,7 @@ class Dividend():
         '''
         Function that gives you a dataframe of the dividends, names and ROI of passed dictionary.
 
-        portfolio: dict, with tickers as keys and lot size as values.
+        portfolio: dict, with tickers as keys and lot size as values as user input.
         '''
         global month_columns
         total_columns = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Price']
