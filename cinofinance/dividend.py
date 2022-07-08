@@ -15,6 +15,7 @@ class Dividend():
         global TICKER_PATH_TOTAL
         self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
         self.POOL_PATH = os.path.join(my_path, '../raw_data/pool.csv')
+        self.POOL_FINAL = os.path.join(my_path, '../raw_data/pool_final.csv')
 
         # Pool for Stock picking
         tickers = pd.read_csv(self.POOL_PATH).to_dict('list')['Tickers']
@@ -120,8 +121,12 @@ class Dividend():
 
 
         df.sort_values('Dividend, annual', ascending=False)
+        df.to_csv(self.POOL_FINAL)
         return df
 
+    def get_final_pool(self):
+        df = pd.read_csv(self.POOL_FINAL)
+        return df
 
 if __name__=='__main__':
     # portfolio = {
