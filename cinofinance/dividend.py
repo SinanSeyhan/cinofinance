@@ -1,6 +1,7 @@
 from calendar import month
 import pandas as pd
 import datetime as dt
+from datetime import datetime
 import os
 import numpy as np
 
@@ -102,6 +103,14 @@ class Dividend():
         print('*'*70)
         print(' ')
 
+        # Total Montly income
+        current_month = datetime.now().strftime('%h')
+        monthly = round(df[current_month].sum(), 2)
+        print(' ')
+        print('*'*70)
+        print(f'# The total Dividend Income (EUR) of the portfolio is: {monthly} EUR      #')
+        print('*'*70)
+        print(' ')
         return df
 
 
