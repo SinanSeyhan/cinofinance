@@ -98,18 +98,18 @@ class Dividend():
         # Total income of the portfolio
         total = round(df[month_columns].sum(axis=1).sum(), 2)
         print(' ')
-        print('*'*70)
-        print(f'# The total Dividend Income (EUR) of the portfolio is: {total} EUR     #')
-        print('*'*70)
+        print('#'*70)
+        print(f'# The Total Annual Dividend Income of the portfolio is: {total} EUR     #')
+        print('#'*70)
         print(' ')
 
         # Total Montly income
         current_month = datetime.now().strftime('%h')
         monthly = round(df[current_month].sum(), 2)
         print(' ')
-        print('*'*70)
-        print(f'# The total Dividend Income (EUR) of the portfolio is: {monthly} EUR      #')
-        print('*'*70)
+        print('#'*70)
+        print(f'# The Total Dividend Income for {current_month} of the portfolio is: {monthly} EUR      #')
+        print('#'*70)
         print(' ')
         return df
 
