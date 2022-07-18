@@ -95,6 +95,13 @@ class Dividend():
         df[month_columns] = df[month_columns].multiply(df['Lot'], axis='index')
         df['Dividend, annual'] = df[month_columns].sum(axis=1)
 
+        # Total Row
+        df.loc["Total"] = df.sum(numeric_only=True)
+        df.loc["Total", 'Price'] = 0
+        df.loc["Total", 'Lot'] = 0
+        df.loc["Total", 'ROI, annual'] = 0
+        df.fillna(0, inplace=True)
+
         # Total income of the portfolio
         total = round(df[month_columns].sum(axis=1).sum(), 2)
         print(' ')
@@ -111,6 +118,8 @@ class Dividend():
         print(f'# The Total Dividend Income for {current_month} of the portfolio is: {monthly} EUR      #')
         print('#'*70)
         print(' ')
+
+
         return df
 
 
