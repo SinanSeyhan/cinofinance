@@ -87,6 +87,8 @@ class Dividend():
     def get_portfolio_dividends(self, portfolio):
         '''
         Gives a dataframe that is multiplicated with Lot size.
+
+        portfolio: Dictionary
         '''
         df = self.get_dividends(portfolio)
 
