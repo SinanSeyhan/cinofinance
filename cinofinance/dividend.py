@@ -105,7 +105,7 @@ class Dividend():
         df.fillna(0, inplace=True)
 
         # Total income of the portfolio
-        total = round(df[month_columns].sum(axis=1).sum(), 2)
+        total = round(df.loc['Total', 'Dividend, annual'], 2)
         print(' ')
         print('#'*70)
         print(f'# The Total Annual Dividend Income of the portfolio is: {total} EUR     #')
@@ -114,7 +114,7 @@ class Dividend():
 
         # Total Montly income
         current_month = datetime.now().strftime('%h')
-        monthly = round(df[current_month].sum(), 2)
+        monthly = round(df.loc['Total', current_month], 2)
         print(' ')
         print('#'*70)
         print(f'# The Total Dividend Income for {current_month} of the portfolio is: {monthly} EUR      #')
