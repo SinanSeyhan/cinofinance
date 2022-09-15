@@ -17,6 +17,7 @@ class Dividend():
         self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
         self.POOL_PATH = os.path.join(my_path, '../raw_data/pool.csv')
         self.POOL_FINAL = os.path.join(my_path, '../raw_data/pool_final.csv')
+        self.PORTFOLIO_PATH = os.path.join(my_path, '../raw_data/portfolio.xlsx')
 
         # Pool for Stock picking
         tickers = pd.read_csv(self.POOL_PATH).to_dict('list')['Tickers']
