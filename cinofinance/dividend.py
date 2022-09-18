@@ -1,4 +1,3 @@
-from calendar import month
 import pandas as pd
 import datetime as dt
 from datetime import datetime
@@ -79,7 +78,7 @@ class Dividend():
                 tables_dict[tbl.name]['dataframe'] = df
         # a dictionary of all tables in the Excel workbook
         portfolio = tables_dict['Table1']['dataframe']
-
+        portfolio = portfolio.set_index('Tickers')
         return portfolio
 
 
