@@ -2,4 +2,8 @@ import streamlit as st
 from cinofinance.dividend import Dividend
 
 # Get the Portfolio
-Dividend().get_portfolio()
+portfolio = Dividend().get_portfolio()
+
+
+st.header('The Portfolio:')
+st.table(portfolio)

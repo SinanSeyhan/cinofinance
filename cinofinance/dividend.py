@@ -38,7 +38,7 @@ class Dividend():
         global portfolio
         portfolio = []
         # Load the workbook, from the filename, setting read_only to False
-        wb = load_workbook(filename='../raw_data/portfolio.xlsx', read_only=False, keep_vba=False, data_only=True, keep_links=False)
+        wb = load_workbook(filename=self.PORTFOLIO_PATH, read_only=False, keep_vba=False, data_only=True, keep_links=False)
 
         # Initialize the dictionary of tables
         tables_dict = {}
@@ -78,7 +78,7 @@ class Dividend():
                 tables_dict[tbl.name]['dataframe'] = df
         # a dictionary of all tables in the Excel workbook
         portfolio = tables_dict['Table1']['dataframe']
-        portfolio = portfolio.set_index('Tickers')
+        portfolio = portfolio.set_index('Tickers').dropna(axis='columns', how='all')
         return portfolio
 
 
