@@ -27,3 +27,4 @@ memoized-property
 termcolor
 datetime
 openpyxl
+streamlit
