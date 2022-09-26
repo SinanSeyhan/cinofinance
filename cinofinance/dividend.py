@@ -26,14 +26,6 @@ class Dividend():
 
         self.pool = dict(zip(tickers, [1] * len(tickers)))
 
-    def usd2eur(self, amount):
-        '''
-        Function that converts US Dollars to EUR
-
-        amount: float, US Dollars to convert
-        '''
-        return amount * CurrencyRates().get_rates('USD')['EUR']
-
     def get_portfolio(self):
         global portfolio
         portfolio = []
@@ -119,9 +111,7 @@ class Dividend():
         price = [yf.download(i, period='1d')['Adj Close'].values[0] for i in portfolio.keys()]
         result['Price'] = price
 
-        # Convert to EUR
-        result[total_columns] = result[total_columns].apply(self.usd2eur)
-
+        # Add TAX
         result[month_columns] = result[month_columns] * brutto2netto
 
         # Add annual Dividends and ROI
@@ -172,8 +162,6 @@ class Dividend():
 
 
         return df
-
-
 
     def get_dividend_pool(self, capital):
 
