@@ -86,7 +86,7 @@ class Portfolio():
         for tick in portfolio.index:
             dividend[tick] = data[tick]['Dividends']
         dividends = pd.DataFrame(dividend).reset_index()
-        dividends['Date'] = dividends['Date'] + pd.DateOffset(days=15)
+        dividends['Date'] = dividends['Date'] + pd.DateOffset(days=20)
         dividends.Date = dividends.Date.dt.strftime('%Y-%m')
         dividends = dividends.groupby(by='Date').sum().T
 
