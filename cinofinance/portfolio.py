@@ -1,16 +1,17 @@
-import os
-from unittest import result
 import pandas as pd
 from openpyxl import load_workbook
 import yfinance as yf
 from datetime import datetime
 
+# Importing the Paths for the List
+from paths import *
+
 
 class Portfolio():
     def __init__(self) -> None:
-        my_path = os.path.abspath(os.path.dirname(__file__))
-        self.PORTFOLIO_PATH = os.path.join(my_path, '../raw_data/portfolio.xlsx')
-        self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
+
+        self.PORTFOLIO_PATH = PORTFOLIO_PATH
+        self.TICKER_PATH_TOTAL = TICKER_PATH_TOTAL
 
     def get_portfolio(self):
         '''

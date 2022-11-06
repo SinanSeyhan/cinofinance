@@ -25,6 +25,9 @@ six>=1.14
 joblib
 memoized-property
 termcolor
-datetime
-openpyxl
+
+
 streamlit
+
+# Excel reading
+openpyxl

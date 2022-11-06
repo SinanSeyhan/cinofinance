@@ -7,15 +7,15 @@ from cinofinance.portfolio import Portfolio
 import yfinance as yf
 from forex_python.converter import CurrencyRates
 
+from paths import *
+
 
 class Dividend():
     def __init__(self):
 
-        my_path = os.path.abspath(os.path.dirname(__file__))
-        global TICKER_PATH_TOTAL
-        self.TICKER_PATH_TOTAL = os.path.join(my_path, '../raw_data/nasdaq_screener.csv')
-        self.POOL_PATH = os.path.join(my_path, '../raw_data/pool.csv')
-        self.POOL_FINAL = os.path.join(my_path, '../raw_data/pool_final.csv')
+        self.TICKER_PATH_TOTAL = TICKER_PATH_TOTAL
+        self.POOL_PATH = POOL_PATH
+        self.POOL_FINAL = POOL_FINAL
 
 
         # Pool for Stock picking
@@ -136,17 +136,17 @@ class Dividend():
         return df
 
 if __name__=='__main__':
-    # portfolio = {
-    #             'NVDA': 2, # NVIDIA
-    #             'STAG': 9, # STAG
-    #             'MCO': 1, # MOODY'S
-    #             'MSFT': 1, # MICROSOFT
-    #             'AGNC': 20, # AGNC INVESTMENT
-    #             'V': 1, # VISA
-    #             'BNTX': 1, # BIONTECH
-    #             }
+    portfolio = {
+                'NVDA': 2, # NVIDIA
+                'STAG': 9, # STAG
+                'MCO': 1, # MOODY'S
+                'MSFT': 1, # MICROSOFT
+                'AGNC': 20, # AGNC INVESTMENT
+                'V': 1, # VISA
+                'BNTX': 1, # BIONTECH
+                }
 
-    # df = Dividend().get_portfolio_dividends(portfolio)
-    # print(df)
-    df = Dividend().get_dividend_pool()
-    print(df.columns)
+    df = Dividend().get_portfolio_dividends(portfolio)
+    print(df)
+    # df = Dividend().get_dividend_pool(100)
+    # print(df.columns)
