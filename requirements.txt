@@ -20,6 +20,9 @@ yapf
 yfinance
 forex_python
 
+# Trade Republic API
+pytr
+
 # utilities
 six>=1.14
 joblib

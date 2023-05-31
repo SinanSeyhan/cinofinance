@@ -99,4 +99,7 @@ class Portfolio():
 
 if __name__=='__main__':
     df = Portfolio().get_portfolio_dividend()
-    print(df)
+    df1 = Portfolio().get_portfolio()
+    df2 = Portfolio().get_portfolio_data()
+
+    print(df, df1, df2)

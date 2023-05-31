@@ -64,6 +64,11 @@ class Dividend():
         # Add TAX
         result[month_columns] = result[month_columns] * brutto2netto
 
+        # Convert $ to €
+        rate = CurrencyRates().get_rate(base_cur='USD', dest_cur='EUR')
+        result[month_columns] = result[month_columns] * rate
+
+
         # Add annual Dividends and ROI
         result['Dividend, annual'] = result[month_columns].sum(axis=1)
         result['ROI, annual'] = result['Dividend, annual'] / result['Price']
@@ -136,17 +141,26 @@ class Dividend():
         return df
 
 if __name__=='__main__':
-    portfolio = {
-                'NVDA': 2, # NVIDIA
-                'STAG': 9, # STAG
-                'MCO': 1, # MOODY'S
-                'MSFT': 1, # MICROSOFT
-                'AGNC': 20, # AGNC INVESTMENT
-                'V': 1, # VISA
-                'BNTX': 1, # BIONTECH
-                }
+    # portfolio = {
+    #             'NVDA': 2, # NVIDIA
+    #             'STAG': 9, # STAG
+    #             'MCO': 1, # MOODY'S
+    #             'MSFT': 1, # MICROSOFT
+    #             'AGNC': 20, # AGNC INVESTMENT
+    #             'V': 1, # VISA
+    #             'BNTX': 1, # BIONTECH
+    #             }
 
-    df = Dividend().get_portfolio_dividends(portfolio)
+    import portfolio
+
+    portfolio_data = portfolio.Portfolio().get_portfolio()[['2023-05']]
+
+    portfolio_dict = portfolio_data['2023-05'].to_dict()
+
+    print(portfolio_dict)
+    df = Dividend().get_portfolio_dividends(portfolio_dict)
     print(df)
+    rate = CurrencyRates().get_rate(base_cur='USD', dest_cur='EUR')
+    print(rate)
     # df = Dividend().get_dividend_pool(100)
     # print(df.columns)
